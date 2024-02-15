@@ -50,8 +50,8 @@ def fun(x):
     return b
 n=int(input())
 v=fun(n)
-print(v,'π')
-#9
+print(v,'*π')
+#10
 def fun(x):
     l=[]
     for i in x:

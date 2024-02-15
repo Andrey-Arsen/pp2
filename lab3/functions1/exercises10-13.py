@@ -1,4 +1,4 @@
-#10
+#11
 def pal(x):
     for i in range(len(x)):
         if x[i]!=x[len(x)-i-1]:
@@ -10,7 +10,7 @@ if pal(x):
 else:
     print("Not")
     
-#11
+#12
 def his(x):
     for i in x:
         j=1
@@ -20,7 +20,7 @@ def his(x):
         print()
 his([4,9,7])
 
-#12
+#13
 import random
 def fun(x, ran):
     if x==ran:
