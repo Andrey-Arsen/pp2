@@ -56,7 +56,7 @@ def drawPaint(paints):
         if paint[2] == 1:
             pygame.draw.circle(screen, paint[0], paint[1], 15)
         elif paint[2] == 0:
-            pygame.draw.rect(screen, paint[0], [paint[1][0]-15, paint[1][1]-15, 30, 30])
+            pygame.draw.rect(screen, paint[0], [paint[1][0]-30, paint[1][1]-30, 60, 60])
         elif paint[2] == 2:
             pygame.draw.polygon(screen, paint[0], [[paint[1][0], paint[1][1]+15], [paint[1][0]-15, paint[1][1]-15], [paint[1][0]+15, paint[1][1]-15]])
         elif paint[2] == 3:

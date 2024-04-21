@@ -22,8 +22,8 @@ while True:
     
     time = datetime.datetime.now()
 
-    angleS=time.second*(-6)
-    angleM = time.minute*(-6)
+    angleS=time.second*(6)
+    angleM = time.minute*(6)
     
     nowS = pygame.transform.rotate(image2, angleS)
     nowM = pygame.transform.rotate(image3, angleM)

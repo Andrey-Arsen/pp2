@@ -26,7 +26,7 @@ SPEED_INCREMENT = 0.1  # Speed increment per frame
 SCORE = 0
 
 # Setting up Fonts
-font = pygame.font.SysFont("Verdana", 60)
+font = pygame.font.SysFont("Arsen", 60)
 font_small = pygame.font.SysFont("Verdana", 20)
 game_over = font.render("Game Over", True, BLACK)
 
