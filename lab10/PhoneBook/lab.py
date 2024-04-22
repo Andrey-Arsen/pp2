@@ -16,7 +16,7 @@ def inputData():
     cur.execute(' INSERT INTO postgres.public.phone_book("PersonName", "PhoneNumber") VALUES( %s, %s); ' , (name, number))
 
 def importFromCSV():
-    with open(r'C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\PhoneBook\abc.csv', 'r') as file:
+    with open(r'C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\abc.csv', 'r') as file:
         reader = csv.reader(file)
         for row in reader:
             personName, phoneNumber = row
@@ -29,7 +29,7 @@ def update_contact(personName, phoneNumber):
 def queryData():
     cur.execute(' SELECT * FROM postgres.public.phone_book ')
     data = cur.fetchall()
-    path = r"C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\PhoneBook\a.txt"
+    path = r"C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\a.txt"
 
     f = open(path, "w")
     for row in data:
