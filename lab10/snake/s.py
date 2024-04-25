@@ -37,14 +37,15 @@ def update_user_score(cur, conn, username, score):
 
 
 # Function to display current user level
-def show_user_level(username, cur):
+def show_user_level(username, cur, conn):
     cur.execute("SELECT user_score FROM snake_scores WHERE username = %s", (username,))
     user_score = cur.fetchone()
-    score=user_score[0]
     if user_score:
         print(f"Welcome back, {username}! Your current level is {user_score[0]}.")
     else:
         print(f"Welcome, {username}! You are a new player.")
+        cur.execute("INSERT INTO snake_scores (username, user_score) VALUES (%s, %s)", (username, 0))
+        conn.commit() 
 
 # Initialize database connection and cursor
 conn, cur = initialize_db()
@@ -54,7 +55,7 @@ create_user_table(cur)
 username = input("Enter your username: ")
 
 # Display user's current level
-show_user_level(username, cur)
+show_user_level(username, cur, conn)
 
 # Snake game initialization
 snake_speed = 10
