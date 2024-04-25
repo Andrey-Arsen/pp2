@@ -22,6 +22,13 @@ def importFromCSV():
             personName, phoneNumber = row
             cur.execute(' INSERT INTO postgres.public.phone_book("PersonName", "PhoneNumber") VALUES( %s, %s); ', (personName, phoneNumber))
 
+def importFromCsv():
+    with open(r'C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\abc.csv', 'r') as file:
+        for line in file:
+            data = line.strip().split(',')
+            if len(data) == 2:
+                # Explicitly cast the phone number to text
+                cur.execute('INSERT INTO postgres.public.phone_book("PersonName", "PhoneNumber") VALUES (%s, %s);', (data[0], data[1]))
 
 def update_contact(personName, phoneNumber):
     cur.execute(' UPDATE postgres.public.phone_book SET "PhoneNumber" = %s WHERE "PersonName" = %s ', (phoneNumber, personName))
@@ -58,7 +65,7 @@ while not done:
     if(x == 1):
         inputData()
     elif(x == 2):
-        importFromCSV()
+        importFromCsv()
     elif(x == 3):
         print("Which number do you want to update? Enter name and new number: ")
         name = input()

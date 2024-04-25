@@ -1,6 +1,6 @@
 import psycopg2
 import csv
-
+import openpyxl 
 conn = psycopg2.connect(
     host="localhost",
     database="postgres",
@@ -22,7 +22,12 @@ def importFromCSV():
             personName, phoneNumber = row
             cur.execute(' INSERT INTO postgres.public.phone_book("PersonName", "PhoneNumber") VALUES( %s, %s); ', (personName, phoneNumber))
 
-
+def importFromXL():
+    book=openpyxl.load_workbook(r'C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\PhoneBook\abc.xlsx')
+    sheet=book.active
+    for row in sheet.iter_rows(values_only=True):
+        if len(row) == 2:
+            cur.execute('INSERT INTO postgres.public.phone_book("PersonName", "PhoneNumber") VALUES (%s, %s);', row)
 def update_contact(personName, phoneNumber):
     cur.execute(' UPDATE postgres.public.phone_book SET "PhoneNumber" = %s WHERE "PersonName" = %s ', (phoneNumber, personName))
 
@@ -30,11 +35,13 @@ def queryData():
     cur.execute(' SELECT * FROM postgres.public.phone_book ')
     data = cur.fetchall()
     path = r"C:\Users\ADMIN\OneDrive\Рабочий стол\arsen\lab10\a.txt"
-
+    for row in data:
+        print(row)
     f = open(path, "w")
     for row in data:
         f.write("Name: " + str(row[0]) + "\n" + "Number: " + str(row[1]) + "\n")
     f.close()
+
 
 def deleteData():
     print("Which name do ypu want to delete?\n")
@@ -53,7 +60,8 @@ while not done:
           4. Query data from the table\n\
           5. Delete data from table by person name\n\
           6. Delete all data from table\n\
-          7. Exit")
+          7. Upload form xlsx file\n\
+          8. Exit")
     x = int(input("Enter number 1-5\n"))
     if(x == 1):
         inputData()
@@ -71,6 +79,8 @@ while not done:
     elif(x == 6):
         deleteAllData()
     elif(x == 7):
+        importFromXL()
+    elif(x == 8):
         done = True
     conn.commit()
     
