@@ -10,6 +10,17 @@ conn = psycopg2.connect(
 
 cur = conn.cursor()
 
+def create_table():
+    cur.execute('''
+        CREATE TABLE IF NOT EXISTS postgres.public.phone_book (
+            "PersonName" VARCHAR(255) NOT NULL,
+            "PhoneNumber" VARCHAR(20) NOT NULL
+        );
+    ''')
+
+# Call the function to create the table
+create_table()
+
 def inputData():
     name = input("Hello input your name: ")
     number = input("Input your phone number: ")
